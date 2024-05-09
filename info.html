@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information Page</title>
+ 
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh; /* Ensure that body takes up the full viewport height */
+            flex-direction: column; /* Arrange items vertically */
+        }
+        .container {
+            display: flex;
+            flex: 1; /* Take up remaining space */
+        }
+        .logo {
+            position: absolute; /* Position the logo absolutely */
+            top: 1px; /* Adjust top position */
+            left: 5px; /* Adjust left position */
+            width: 50px; /* Adjust the width of the logo */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 200px;
+            padding: 20px;
+            height: 100vh; /* Extend sidebar to full height */
+            border-left: 2px solid #ccc; /* Add a border on the left side */
+        }
+        .sidebar h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .sidebar button {
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            margin-bottom: 10px;
+            text-align: left;
+            background-color: #555;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+        .sidebar button:hover {
+            background-color: #777;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            text-align: center; /* Center-align content */
+        }
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .box {
+            background-color: #f0f0f0;
+            width: 100%; /* Adjust as needed */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .box h2 {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        .details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            border: 1px solid #ccc; /* Add border to the table */
+            border-collapse: collapse; /* Collapse borders */
+        }
+        .detail {
+            width: calc(12.5% - 10px);
+            margin-bottom: 10px;
+            padding: 10px;
+            border-right: 1px solid #ccc; /* Add border between cells */
+            border-bottom: 1px solid #ccc; /* Add border between rows */
+        }
+        .detail:last-child {
+            border-right: none; /* Remove border on the last cell in a row */
+        }
+        .detail h3 {
+            margin-bottom: 5px;
+        }
+        .form-box {
+            margin-top: 40px; /* Adjust the spacing */
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background-color: #555;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <img src="Logo1.png" alt="Logo" class="logo">
+    <button class="logout-btn" onclick="window.location.href = 'login.html'">Logout</button>
+    <div class="container">
+        <div class="sidebar">
+            <h1>Dashboard</h1>
+<button onclick="window.location.href = 'dashboard.html'">Home</button>
+<button onclick="window.location.href = 'arena.html'">Arena</button>
+<button onclick="window.location.href = 'eq.html'">Equipment</button>
+
+        </div>
+        <div class="main-content">
+            <h1 class="title">Information Page</h1>
+            <div class="box">
+                <h2>Student Information</h2>
+                <div class="details">
+                    <div class="detail">
+                        <h3>Student Name:</h3>
+                        <p>Diana</p>
+                    </div>
+                    <div class="detail">
+                        <h3>Student ID:</h3>
+                        <p>2022812648</p>
+                    </div>
+                    <div class="detail">
+                        <h3>Faculty:</h3>
+                        <p>Faculty of Engineering</p>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="box">
+                <h2>User Manual</h2>
+                <a href="user_manual.pdf" target="_blank">Download User Manual (PDF)</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showArena() {
+            // Code to show arena-related content
+        }
+
+        function showEquipment() {
+            // Code to show equipment-related content
+        }
+
+        function showInformation() {
+            // Code to show information-related content
+        }
+    </script>
+</body>
+</html>

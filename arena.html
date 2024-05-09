@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arena Booking</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        /* Add your CSS styles here */
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        .logo {
+            position: absolute;
+            top: 1px;
+            left: 5px;
+            width: 50px;
+            height: auto;
+        }
+        .sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 200px;
+            padding: 20px;
+            height: 100vh;
+            border-left: 2px solid #ccc;
+        }
+        .sidebar h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .sidebar button {
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            margin-bottom: 10px;
+            text-align: left;
+            background-color: #555;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+        .sidebar button:hover {
+            background-color: #777;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .box {
+            background-color: #f0f0f0;
+            width: 100%;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .box h2 {
+            margin-bottom: 10px;
+        }
+        .details {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+        .details th,
+        .details td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+        .form-box {
+            margin-top: 50px;
+        }
+        .logout-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background-color: #555;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <img src="Logo1.png" alt="Logo" class="logo">
+    <button class="logout-btn" onclick="window.location.href = 'login.html'">Logout</button>
+    <div class="container">
+        <div class="sidebar">
+            <h1>Dashboard</h1>
+            <button onclick="window.location.href = 'dashboard.html'">Home</button>
+            <button onclick="window.location.href = 'eq.html'">Equipment</button>
+            <button onclick="window.location.href = 'info.html'">Information</button>
+        </div>
+        <div class="main-content">
+
+
+    <h1 class="title">Arena Booking</h1>
+    <div class="box">
+        <h2>Booking Details</h2>
+        <table class="details">
+            <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Arena Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Applied Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Training</td>
+                    <td>Tennis Arena</td>
+                    <td>2024-05-1</td>
+                    <td>2024-05-2</td>
+                    <td>2024-04-25</td>
+                    <td>Approved</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="box form-box">
+        <h2>Book Arena</h2>
+        <form id="arenaForm">
+            <label for="eventArena">Event:</label><br>
+            <input type="text" id="eventArena" name="eventArena"><br>
+            <label for="arenaArena">Arena:</label><br>
+            <select id="arenaArena" name="arenaArena">
+                <option value="Football Arena">Football Arena</option>
+                <option value="Basketball Arena">Basketball Arena</option>
+                <option value="Tennis Arena">Tennis Arena</option>
+                <option value="Volleyball Arena">Volleyball Arena</option>
+                <option value="Netball Arena">Netball Arena</option>
+                <option value="Badminton Arena">Badminton Arena</option>
+            </select><br>
+            <label for="startDateArena">Start Date:</label><br>
+            <input type="date" id="startDateArena" name="startDateArena"><br>
+            <label for="endDateArena">End Date:</label><br>
+            <input type="date" id="endDateArena" name="endDateArena"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var bookingDetails = JSON.parse(localStorage.getItem("arenaBookingDetails")) || [];
+    renderBookingDetails(bookingDetails);
+});
+
+document.getElementById("arenaForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    
+    // Get form values
+    var eventName = document.getElementById("eventArena").value;
+    var arena = document.getElementById("arenaArena").value;
+    var startDate = document.getElementById("startDateArena").value;
+    var endDate = document.getElementById("endDateArena").value;
+    var appliedDate = new Date().toISOString().slice(0, 10);
+    var status = "In Progress";
+
+    // Create a new booking object
+    var newBooking = {
+        event: eventName,
+        arena: arena,
+        startDate: startDate,
+        endDate: endDate,
+        appliedDate: appliedDate,
+        status: status
+    };
+
+    // Get existing bookings from local storage
+    var bookingDetails = JSON.parse(localStorage.getItem("arenaBookingDetails")) || [];
+
+    // Add the new booking to the array
+    bookingDetails.push(newBooking);
+
+    // Save the updated bookings to local storage
+    localStorage.setItem("arenaBookingDetails", JSON.stringify(bookingDetails));
+
+    // Render the updated booking details
+    renderBookingDetails(bookingDetails);
+
+    // Reset the form
+    document.getElementById("arenaForm").reset();
+});
+
+function renderBookingDetails(bookingDetails) {
+    var tableBody = document.querySelector(".arena-details");
+    tableBody.innerHTML = "";
+
+    bookingDetails.forEach(function(booking) {
+        var row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${booking.event}</td>
+            <td>${booking.arena}</td>
+            <td>${booking.startDate}</td>
+            <td>${booking.endDate}</td>
+            <td>${booking.appliedDate}</td>
+            <td>${booking.status}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+</script>

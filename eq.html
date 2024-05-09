@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Booking</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        /* Add your CSS styles here */
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        .logo {
+            position: absolute;
+            top: 1px;
+            left: 5px;
+            width: 50px;
+            height: auto;
+        }
+        .sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 200px;
+            padding: 20px;
+            height: 100vh;
+            border-left: 2px solid #ccc;
+        }
+        .sidebar h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .sidebar button {
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            margin-bottom: 10px;
+            text-align: left;
+            background-color: #555;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+        .sidebar button:hover {
+            background-color: #777;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .box {
+            background-color: #f0f0f0;
+            width: 100%;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .box h2 {
+            margin-bottom: 10px;
+        }
+        .details {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+        .details th,
+        .details td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+        .form-box {
+            margin-top: 50px;
+        }
+        .logout-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background-color: #555;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <img src="Logo1.png" alt="Logo" class="logo">
+    <button class="logout-btn" onclick="window.location.href = 'login.html'">Logout</button>
+    <div class="container">
+        <div class="sidebar">
+            <h1>Dashboard</h1>
+            <button onclick="window.location.href = 'dashboard.html'">Home</button>
+            <button onclick="window.location.href = 'arena.html'">Arena</button>
+            <button onclick="window.location.href = 'info.html'">Information</button>
+        </div>
+        <div class="main-content">
+            <h1 class="title">Equipment Booking</h1>
+            <div class="box">
+                <h2>Booking Details</h2>
+                <table class="details">
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Arena Name</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Applied Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>Training</th>
+                        <th>Tennis racket</th>
+                        <th>2024-05-12</th>
+                        <th>2024-05-20</th>
+                        <th>2024-05-05</th>
+                        <th>Approved</th>
+                    </tr>
+                </tbody>
+                </table>
+                
+             
+            </div>
+            <div class="box form-box">
+                <h2>Book Equipment</h2>
+                <form id="equipmentForm">
+                    <label for="event">Event:</label><br>
+                    <input type="text" id="eventEquipment" name="event"><br>
+                    <label for="equipment">Equipment:</label><br>
+                    <select id="equipmentEquipment" name="equipment">
+                        <option value="Football">Football</option>
+                        <option value="Basketball">Basketball</option>
+                        <option value="Tennis Racket">Tennis Racket</option>
+                        <option value="Volleyball">Volleyball</option>
+                        <option value="Netball">Netball</option>
+                        <option value="Badminton Racket">Badminton Racket</option>
+                    </select><br>
+                    <label for="startDate">Start Date:</label><br>
+                    <input type="date" id="startDateEquipment" name="startDate"><br>
+                    <label for="endDate">End Date:</label><br>
+                    <input type="date" id="endDateEquipment" name="endDate"><br><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var bookingDetails = JSON.parse(localStorage.getItem("bookingDetails")) || [];
+                    renderBookingDetails(bookingDetails);
+                });
+            
+                document.getElementById("equipmentForm").addEventListener("submit", function(event) {
+                    event.preventDefault(); // Prevent the default form submission
+                    
+                    // Get form values
+                    var event = document.getElementById("eventEquipment").value;
+                    var equipment = document.getElementById("equipmentEquipment").value;
+                    var startDate = document.getElementById("startDateEquipment").value;
+                    var endDate = document.getElementById("endDateEquipment").value;
+                    var appliedDate = new Date().toISOString().slice(0, 10);
+                    var status = "In Progress";
+            
+                    // Create a new booking object
+                    var newBooking = {
+                        event: event,
+                        equipment: equipment,
+                        startDate: startDate,
+                        endDate: endDate,
+                        appliedDate: appliedDate,
+                        status: status
+                    };
+            
+                    // Get existing bookings from local storage
+                    var bookingDetails = JSON.parse(localStorage.getItem("bookingDetails")) || [];
+            
+                    // Add the new booking to the array
+                    bookingDetails.push(newBooking);
+            
+                    // Save the updated bookings to local storage
+                    localStorage.setItem("bookingDetails", JSON.stringify(bookingDetails));
+            
+                    // Render the updated booking details
+                    renderBookingDetails(bookingDetails);
+            
+                    // Reset the form
+                    document.getElementById("equipmentForm").reset();
+                });
+            
+                function renderBookingDetails(bookingDetails) {
+                    var tableBody = document.querySelector(".details tbody");
+                    tableBody.innerHTML = "";
+                    
+                    bookingDetails.forEach(function(booking) {
+                        var row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${booking.event}</td>
+                            <td>${booking.equipment}</td>
+                            <td>${booking.startDate}</td>
+                            <td>${booking.endDate}</td>
+                            <td>${booking.appliedDate}</td>
+                            <td>${booking.status}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                }
+            </script>
+             

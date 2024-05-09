@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration</title>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      background-image: url('bg img 1.jpg'); 
+      background-size: cover; 
+      padding: 20px;
+      margin: 0; 
+     
+    }
+    .container {
+      width: 300px;
+      margin: 0 auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: 130px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    .logo {
+      position: fixed; /* Position the logo absolutely */
+      top: 10px; /* Adjust top position */
+      left: 710px; /* Adjust left position */
+      width: 120px; /* Adjust the width of the logo */
+      height: auto; /* Maintain aspect ratio */
+    }
+  </style>
+</head>
+<body>
+  <img src="Logo1.png" alt="Logo" class="logo">
+  <div class="container">
+    <h2>Register</h2>
+  
+    <form action="#" method="post">
+      <label for="studentID">Student ID:</label>
+      <input type="text" id="studentID" name="studentID" placeholder="2022123456" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="abcdg@gmail.com" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <label for="confirm_password">Confirm Password:</label>
+      <input type="password" id="confirm_password" name="confirm_password" required>
+      <input type="submit" value="Register" onclick="redirectToLogin(event)">
+    </form>
+
+     
+  </div>
+
+  <script>
+    function redirectToLogin() {
+      event.preventDefault(); 
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
